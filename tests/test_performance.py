@@ -15,6 +15,10 @@ def test_decode_performance():
     decode_points(data)
     assert time.time() - start < 0.5
 
-    
 
-
+@pytest.mark.slow
+def test_triangulation_performance():
+    points = [(i, i * 0.5) for i in range(2000)]
+    start = time.time()
+    triangulate(points)
+    assert time.time() - start < 1.0
