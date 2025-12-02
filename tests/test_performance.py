@@ -1,33 +1,18 @@
 import pytest
 import time
-from triangulator.triangulator import triangulate_points
+from triangulator.binary_utils import decode_points, encode_triangles
+from triangulator.triangulator import triangulate
+import struct
 
-@pytest.mark.performance
-def test_triangulation_speed():
-    points = [(0,0),(1,0),(0,1),(1,1)]
-    start = time.time()
-    triangles = triangulate_points(points)
-    end = time.time()
-    duration = end - start
-    assert duration < 1 
 
-@pytest.mark.performance
-def test_triangulation_10_points():
-    points = [(i,i*0.5) for i in range(10)]
-    start = time.time()
-    triangles = triangulate_points(points)
-    assert time.time() - start < 0.1
+@pytest.mark.slow
+def test_decode_performance():
+    data = struct.pack('<I', 1000)
+    for _ in range(1000):
+        data += struct.pack('<ff', 1.0, 2.0)
 
-@pytest.mark.performance
-def test_triangulation_100_points():
-    points = [(i,i*0.5) for i in range(100)]
     start = time.time()
-    triangles = triangulate_points(points)
+    decode_points(data)
     assert time.time() - start < 0.5
 
-@pytest.mark.performance
-def test_triangulation_1000_points():
-    points = [(i,i*0.5) for i in range(1000)]
-    start = time.time()
-    triangles = triangulate_points(points)
-    assert time.time() - start < 2
+

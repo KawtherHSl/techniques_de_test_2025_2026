@@ -1,27 +1,27 @@
-from flask import Flask, jsonify
-from triangulator.binary_utils import encode_triangles, decode_points
-from triangulator.triangulator import triangulate_points
+from flask import Flask, Response
+import requests
+from triangulator.binary_utils import decode_points, encode_triangles
+from triangulator.triangulator import triangulate
 
+def create_app():
+    app = Flask(__name__)
 
-app = Flask(__name__)
+    @app.get("/triangulate/<int:ps_id>")
+    def handle(ps_id):
+        url = f"http://pointsetmanager/pointset/{ps_id}"
+        r = requests.get(url)
 
-POINT_SETS = {
-    "triangulable": [(0,0), (1,0), (0,1)], 
-    "collinear": [(0,0),(1,1),(2,2)]       
-}
+        if r.status_code == 404:
+            return "PointSet not found", 404
 
+        points = decode_points(r.content)
+        triangles = triangulate(points)
+        encoded = encode_triangles(points, triangles)
 
+        return Response(encoded, mimetype="application/octet-stream")
 
-@app.route('/triangulation/<pointSetId>', methods=['GET'])
-def triangulate(pointSetId):
-    points = POINT_SETS.get(pointSetId)
-    if points is None:
-        return jsonify({"error": "Point set not found"}), 404
+    return app
 
-    triangles = triangulate_points(points)
-
-    if not triangles:
-        return jsonify({"error": "Triangulation failed"}), 501
-
-    triangles_list = [list(map(int, tri)) for tri in triangles]
-    return jsonify({"triangles": triangles_list}), 200
+if __name__ == "__main__":
+    app = create_app()
+    app.run(debug=True)

@@ -1,1 +1,0 @@
-from triangulator.binary_utils import encode_triangles, decode_points
