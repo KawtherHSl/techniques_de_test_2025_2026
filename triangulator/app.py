@@ -1,6 +1,6 @@
 from flask import Flask, Response
 import requests
-from triangulator.binary_utils import  encode_triangles
+from triangulator.binary_utils import decode_points, encode_triangles
 from triangulator.triangulator import triangulate
 
 def create_app():
@@ -14,6 +14,7 @@ def create_app():
         if r.status_code == 404:
             return "PointSet not found", 404
 
+        points = decode_points(r.content)
         triangles = triangulate(points)
         encoded = encode_triangles(points, triangles)
 
@@ -21,4 +22,6 @@ def create_app():
 
     return app
 
-
+if __name__ == "__main__":
+    app = create_app()
+    app.run(debug=True)
