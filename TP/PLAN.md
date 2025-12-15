@@ -19,7 +19,7 @@ Objectif: Ce plan donne une idée sur la startégie chosie pour tester le code q
    pourquoi: pour tester que les micros services communiquet entre eux sans avoir besoin de réseau réel.
 
 3) Tests de l'api triangulator (http): c'est pour vérifier si le triangulator réponds bien au requettes http.
-   comment: on simule l'envoie des requettes vers l'api pour vérifier les réponses avec un client test par exemple si la réponse est 200: réponse binaire contient les triangles calculés, 400: signal des données non valides (problème de format ou mauvaises requettes) et 404: données non trouvées. 
+   comment: on simule l'envoie des requettes vers l'api pour vérifier les réponses avec un client test par exemple si la réponse est 200: réponse binaire contient les triangles calculés,  404: données non trouvées. 
    pourquoi: vérifier la conformité du service REST et assurer que l'api respecte les bonnes réponses et gère bien les erreurs.
 
 4) Test de performance: c'est pour mesurer le temps de décodage et de triangulation.
