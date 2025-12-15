@@ -9,51 +9,51 @@ Le TP m’a permis de travailler sur différents types de tests : unitaires, d�
 
 Tests unitaires robustes pour le décodage des points et l'encodage des triangles :
 
-    Verifier les données correctes et incorrectes.
+- Verifier les données correctes et incorrectes.
 
-    Gestion des cas particuliers comme points vides ou incomplets.
+- Gestion des cas particuliers comme points vides ou incomplets.
 
 Tests d’intégration avec requests_mock :
 
-    Simulation de PointSetManager pour vérifier la communication avec le Triangulator sans avoir besoin de réseau réel.
+- Simulation de PointSetManager pour vérifier la communication avec le Triangulator sans avoir besoin de réseau réel.
 
 Tests d’API HTTP :
 
-    Vérification des réponses correctes (200), et données non trouvées (404).
+- Vérification des réponses correctes (200), et données non trouvées (404).
 
 Tests de performance :
 
-    Mesure du temps de décodage pour 1000 points et triangulation pour 2000 points.
+- Mesure du temps de décodage pour 1000 points et triangulation pour 2000 points.
 
 Qualité et couverture du code :
 
-   Utilisation de coverage pour mesurer la couverture.
+- Utilisation de coverage pour mesurer la couverture.
 
-   ruff pour assurer la qualité et la conformité des règles de coding.
+- ruff pour assurer la qualité et la conformité des règles de coding.
 
 Gestion des erreurs : 
 
-   Données malformées, PointSet vide, invalides.
+- Données malformées, PointSet vide, invalides.
 
 Ces tests ont permis de garantir la stabilité et la robustesse du service dans différents scénarios.
 
 3. Difficultés rencontrées
 
- Format binaire : Comprendre comment encoder et décoder correctement les points et les triangles.
+- Format binaire : Comprendre comment encoder et décoder correctement les points et les triangles.
 
- Cas géométriques particuliers : points alignés (aucun triangle possible), carré (2 triangles), grande quantité de points.
+- Cas géométriques particuliers : points alignés (aucun triangle possible), carré (2 triangles), grande quantité de points.
 
- Performance : Assurer que le décodage et la triangulation restent rapides pour de grands ensembles de points.
+- Performance : Assurer que le décodage et la triangulation restent rapides pour de grands ensembles de points.
 
- Tests automatisés : Prévoir tous les cas possibles avant même de commencer l’implémentation (“test first”).
+- Tests automatisés : Prévoir tous les cas possibles avant même de commencer l’implémentation (“test first”).
 
 4. Ce que j’aurais fait différemment
 
-   Ajouter de tests pour des ensembles de points plus complexes.
+- Ajouter de tests pour des ensembles de points plus complexes.
 
-   Optimiser l’algorithme de triangulation pour les ensembles très volumineux.
+- Optimiser l’algorithme de triangulation pour les ensembles très volumineux.
 
-   Ajuster certaines fonctionnalités pour augmenter la compréhension et la facilité de maintenance du code.
+- Ajuster certaines fonctionnalités pour augmenter la compréhension et la facilité de maintenance du code.
 
 5. Conclusion 
 
