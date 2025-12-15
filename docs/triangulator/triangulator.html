@@ -44,16 +44,40 @@ el.replaceWith(d);
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="triangulator.triangulator.triangulate_points"><code class="name flex">
-<span>def <span class="ident">triangulate_points</span></span>(<span>points)</span>
+<dt id="triangulator.triangulator.triangulate"><code class="name flex">
+<span>def <span class="ident">triangulate</span></span>(<span>points)</span>
 </code></dt>
 <dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def triangulate_points(points):
-    pass</code></pre>
+<pre><code class="python">def triangulate(points):
+    n = len(points)
+    if n &lt; 3:
+        return []
+
+    # verification de l’alignement
+    def collinear(a, b, c):
+        return (b[0] - a[0])*(c[1] - a[1]) == (b[1] - a[1])*(c[0] - a[0])
+
+    # si tout est aligné
+    if all(collinear(points[0], points[1], p) for p in points[2:]):
+        return []
+
+    # cas particulier (carré)
+    if n == 4:
+        return [
+            (0, 1, 2),
+            (0, 2, 3)
+        ]
+
+    # triangulation simple 
+    triangles = []
+    for i in range(1, n - 1):
+        triangles.append((0, i, i + 1))
+
+    return triangles</code></pre>
 </details>
 <div class="desc"></div>
 </dd>
@@ -74,7 +98,7 @@ el.replaceWith(d);
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="triangulator.triangulator.triangulate_points" href="#triangulator.triangulator.triangulate_points">triangulate_points</a></code></li>
+<li><code><a title="triangulator.triangulator.triangulate" href="#triangulator.triangulator.triangulate">triangulate</a></code></li>
 </ul>
 </li>
 </ul>

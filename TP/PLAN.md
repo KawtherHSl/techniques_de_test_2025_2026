@@ -2,15 +2,24 @@ Objectif: Ce plan donne une idée sur la startégie chosie pour tester le code q
 
 1) Tests unitaires:
    1.1. tester le décodage des points: La fonction attends une sortie comme : {(1.0, 1.0), (1.2 ,2.0), (4.0, 5.0)}, si elle reçoit des données incomplets ou mal formées elle lance une exception au lieu de planter le code.
-   Comment : on écrit un test automatique une foction qui prend un flux bianire en entrée et compare avec la liste attendu s'il y a une erreur elle declenche une exception.
+
+   les sénarios du tests : décoder un point valide en séparant les bytes, dévoder un point non valides, decoder un point normal (complet ie tous les bytes ensembles), décoder les points vides et decoder les point malformés
+
+   Comment : on écrit un test automatique une foction pour chaque sénario qui prend un flux bianire en entrée et compare avec la liste attendu s'il y a une erreur elle declenche une exception.
    pourquoi:ce teste garantie que le module parsing binaire fonctionne correctement et prend bien en charge les erreurs des formats sans bloquer le focntionnement du code.
    
-   1.2.  Tetser l'ncodage de triangle: la focntion prend en entré une liste des triangles par exemple : [(1,2,3)] càd nous avons un seul triangle avec les points 1 2 3, et esaie de convertir ce triangle en format binaire.
+   1.2.  Tetser l'encodage de triangle: la focntion prend en entré une liste des triangles par exemple : [(1,2,3)] càd nous avons un seul triangle avec les points 1 2 3, et esaie de convertir ce triangle en format binaire.
+
+   Les sénarios du tests : encodage d'un triangle simple, et d'un triangle vide.
+
    comment: on écrit un test automatique qui prend la liste des triangle en entrée et compare avec le flux binaire attendue, si ce n'est pas conforme elle déclenche une exception.
    pourquoi: ce teste nous montre si l'ecnodage fonctionne correctemet.
    
    1.3. Tester le calcul de triangulation:
-   comment: dans ce cas on teste avec plusieur types de points ( 3 points alignés ce quoi donne un triangles, 4 points qui forment un carré ce qui donne 2 triangles, et des points alignés qui donne aucun triangle), on passe ces 3 cas au calcul triangulations (la focntion de triangulation) et on observe les résultats et on les compares avce les résultats attendus.
+   comment: dans ce cas on teste avec plusieur types de points on passe les sénario possible au calcul triangulations (la focntion de triangulation) et on observe les résultats et on les compares avce les résultats attendus.
+
+   Les sénarios du tests : trinagulation avec 3 points ,avec 4 points (formants un carré), avec points alignés, avec 2 points , et avec plus de 3 points.
+   
    pourquoi: ce teste nous garantit le bon fonctionnement  de la logique géométrique de l'algorithme.
 
 2) Tests d'intégration:

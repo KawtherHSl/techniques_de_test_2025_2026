@@ -45,28 +45,56 @@ el.replaceWith(d);
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="triangulator.binary_utils.decode_points"><code class="name flex">
-<span>def <span class="ident">decode_points</span></span>(<span>data)</span>
+<span>def <span class="ident">decode_points</span></span>(<span>data: bytes)</span>
 </code></dt>
 <dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def decode_points(data):
-    pass</code></pre>
+<pre><code class="python">def decode_points(data: bytes):
+    &#34;&#34;&#34;Format attendu : [count][x1][y1][x2][y2]...&#34;&#34;&#34;
+    if len(data) == 0:
+        return []   
+    
+    if len(data) &lt; 4:
+       
+        raise struct.error(&#34;Data too short&#34;)
+
+    # pour le nombre de points
+    count = struct.unpack(&#39;&lt;I&#39;, data[:4])[0]
+    expected_size = 4 + count * 8
+
+    if len(data) != expected_size:
+        raise struct.error(&#34;Malformed data&#34;)
+
+    points = []
+    offset = 4
+    for _ in range(count):
+        x, y = struct.unpack(&#39;&lt;ff&#39;, data[offset:offset+8])
+        points.append((x, y))
+        offset += 8
+    
+    return points</code></pre>
 </details>
-<div class="desc"></div>
+<div class="desc"><p>Format attendu : [count][x1][y1][x2][y2]&hellip;</p></div>
 </dd>
 <dt id="triangulator.binary_utils.encode_triangles"><code class="name flex">
-<span>def <span class="ident">encode_triangles</span></span>(<span>triangles)</span>
+<span>def <span class="ident">encode_triangles</span></span>(<span>points, triangles)</span>
 </code></dt>
 <dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def encode_triangles(triangles):
-    pass</code></pre>
+<pre><code class="python">def encode_triangles(points, triangles):
+    result = struct.pack(&#39;&lt;I&#39;, len(points))
+    for x, y in points:
+        result += struct.pack(&#39;&lt;ff&#39;, x, y)
+    result += struct.pack(&#39;&lt;I&#39;, len(triangles))
+    for a, b, c in triangles:
+        result += struct.pack(&#39;&lt;III&#39;, a, b, c)
+    return result</code></pre>
 </details>
 <div class="desc"></div>
 </dd>

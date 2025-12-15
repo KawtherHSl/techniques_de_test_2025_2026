@@ -19,3 +19,20 @@ def test_triangulate_aligned_points():
     points = [(0, 0), (1, 1), (2, 2)]
     triangles = triangulate(points)
     assert triangles == []  # aucun triangl possible
+
+
+def test_triangulate_two_points():
+    points = [(0, 0), (1, 1)]
+    assert triangulate(points) == []
+
+
+def test_triangulate_more_points():
+    points = [(0,0), (1,0), (1,1), (0,1), (0.5,0.5)]
+    triangles = triangulate(points)
+    assert len(triangles) > 0
+
+
+
+
+
+

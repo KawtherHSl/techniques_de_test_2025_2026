@@ -1,6 +1,9 @@
-import pytest
 import struct
+
+import pytest
+
 from triangulator.binary_utils import decode_points, encode_triangles
+
 
 def test_decode_points_valid_input():
     data = struct.pack('I', 2) + struct.pack('ff', 0, 1) + struct.pack('ff', 0, 2)
@@ -39,3 +42,6 @@ def test_encode_triangles_normal():
 
 def test_encode_triangles_empty():
     assert encode_triangles([], []) == struct.pack('<I', 0) + struct.pack('<I', 0)
+    
+
+

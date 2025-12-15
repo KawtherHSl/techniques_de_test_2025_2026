@@ -1,8 +1,6 @@
 import struct
 
 
-
-
 def encode_triangles(points, triangles):
     result = struct.pack('<I', len(points))
     for x, y in points:

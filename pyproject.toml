@@ -1,6 +1,6 @@
 [tool.ruff.lint]
 select = [
-    "D",
+    
     "E",
     "F",
     "UP",
@@ -8,3 +8,9 @@ select = [
     "SIM",
     "I",
 ]
+
+[tool.ruff]
+line-length = 88
+
+
+

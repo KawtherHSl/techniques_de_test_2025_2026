@@ -1,8 +1,11 @@
-import pytest
-import time
-from triangulator.binary_utils import decode_points, encode_triangles
-from triangulator.triangulator import triangulate
 import struct
+import time
+
+import pytest
+
+from triangulator.binary_utils import decode_points
+from triangulator.triangulator import triangulate
+
 
 @pytest.mark.slow
 def test_decode_performance1():
